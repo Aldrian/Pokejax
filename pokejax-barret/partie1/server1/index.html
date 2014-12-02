@@ -1,0 +1,22 @@
+<html>
+	<head> 
+		<script> 
+			'use strict';  
+			window.addEventListener('load', function() {
+				var frame = document.querySelector('iframe');
+			});
+			window.addEventListener('message', function(e) { 
+				var frame = document.querySelector('iframe');
+				if (e.origin == 'http://localhost:9000') { 
+					alert(e.data);
+				} 
+				else{
+					alert("alerte ! origine inconnue !");
+				}
+			});
+		</script> 
+	</head> 
+		<body> 
+			<iframe src="http://localhost:9000/inner.html"/> 
+		</body> 
+</html>

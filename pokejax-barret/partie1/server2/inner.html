@@ -1,0 +1,10 @@
+<html> 
+	<body> 
+		Contenu
+		<script type="text/javascript">
+			window.addEventListener('load', function(){
+				window.parent.postMessage('Message de la fenetre fille', 'http://localhost:9090');
+			});
+		</script>
+	</body> 
+</html>

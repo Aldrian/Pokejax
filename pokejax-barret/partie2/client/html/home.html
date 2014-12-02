@@ -1,0 +1,43 @@
+<nav class="red lighten-1">
+<div class="container"> 
+  <div class="nav-wrapper">
+    <a href="/" class="brand-logo">Pokéjax</a>
+    <form name="searchbar" method = "get" action="" class ="navbar-search">
+    <input type="text" name="search" id="requete" ng-model="keywords" ng-keyup="search()" autocomplete="off" placeholder="Recherchez un pokémon..." required>
+    </form>    
+    <ul id="nav-mobile" class="right side-nav">
+      <li><a href="/">Accueil</a></li>
+      <li><a href="/#/rapport/">Rapport</a></li>
+    </ul>
+    <a class="button-collapse" href="/" data-activates="nav-mobile"><i class="mdi-navigation-menu"></i></a>
+  </div>
+</div>
+</nav>
+
+
+<div class="container">     
+    <div class="row">
+        <div class="col-lg-8">  
+
+        <div class="row" ng-show="searchbar.search.$valid">
+            <br/>
+            <h4>Résultats pour :  {{keywords}}</h4>            
+        </div>
+
+        <div class="row" ng-show="errorMessage">
+             <br/>   
+            <h5>{{errorMessage}}</h5>         
+        </div>
+
+        <div class="row" ng-show="loaded==false">
+             <preloader></preloader>         
+        </div>
+
+
+        
+      <pokemon class="fade" ng-model="result" ng-repeat="pokemon in pokemons | orderBy:['numero']" ng-show="loaded==true"></pokemon>
+            
+            
+        </div>
+    </div>
+</div>

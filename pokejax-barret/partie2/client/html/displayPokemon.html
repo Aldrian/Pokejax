@@ -1,0 +1,111 @@
+<nav id="{{pokemon.type1}}-dark">
+<div class="container"> 
+  <div class="nav-wrapper">
+    <a href="/" class="brand-logo">Pokéjax</a>
+    <ul id="nav-mobile" class="right side-nav">
+      <li><a href="/">Accueil</a></li>
+      <li><a href="/#/rapport/">Rapport</a></li>
+      <li><a href="/#{{url}}/#chat">Chat ! ({{nbusers}})</a></li>
+    </ul>
+    <a class="button-collapse" href="/#/" data-activates="nav-mobile"><i class="mdi-navigation-menu"></i></a>
+  </div>
+</div>
+</nav>
+
+<div class="row" ng-show="loaded==false">
+     <preloader></preloader>         
+</div>
+
+
+<div class="row" ng-show="loaded==true">
+    
+
+<section class="module parallaxe" style="background-image: url('http://pldh.net/media/gallery/the493/{{pokemon.nomen | lowercase}}.jpg');">
+  <div class="row container">
+    <div class="col m8">
+    <h1 class="header">{{pokemon.numero}} - {{pokemon.nom}}</h1>
+      <h2 class="light">{{pokemon.nomen}} (EN)</h2>
+      <h2 class="light">{{pokemon.nomja}} (JA)</h2>
+      <h2 class="light">Espèce : {{pokemon.espece}}</h2>
+    </div>
+    <div class="col m4">
+      <img ng-src="http://assets22.pokemon.com/assets/cms2/img/pokedex/full/{{pokemon.numero}}.png/"/>
+    </div>
+  </div>
+</section>
+
+<section class="module content">
+     
+    <div class="row container">
+    <h3 id="texte-{{pokemon.type1}}">Attaques : </h3>
+    <table class="striped">
+        <thead>
+            <tr>
+                <th>Niveau</th>
+                <th>Nom</th>
+                <th>Puissance</th>
+                <th>Precision</th>
+                <th>PP</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr ng-repeat="attaque in pokemon.attaques">
+                <td>{{attaque.niveau}}</td>
+                <td>{{attaque.nom}}</td>
+                <td>{{attaque.puissance}}</td>
+                <td>{{attaque.precision}}</td>
+                <td>{{attaque.pp}}</td>
+            </tr>
+        </tbody>
+
+    </table>
+
+
+    </div>
+</section>
+
+<section class="module content  grey lighten-4">
+     
+    <div class="row container">
+      <h3 id="texte-{{pokemon.type1}}" ng-if="nbusers == 1">Discutons un peu... ({{nbusers}} utilisateurs connecté)  <i class="mdi-communication-chat"></i></h3>
+      <h3 id="texte-{{pokemon.type1}}" ng-if="nbusers > 1">Discutons un peu... ({{nbusers}} utilisateur connectés)  <i class="mdi-communication-chat"></i></h3> 
+    </div>
+    
+
+    <div class="row container">
+      <div id="chat" class="col m8 offset-m2">
+         <blockquote class="row" id="blockquote-{{pokemon.type1}}" ng-repeat="message in messages" class="ng-scope">
+            <span id="texte-{{pokemon.type1}}">  {{message.username}} : </span>
+            <span>{{message.message}}</span>
+          </blockquote>
+     </div>    
+    </div>
+    
+
+    <div id="envoi" class="row container">
+      <div class="col m8 offset-m2">
+      <div class="row">
+      <form ng-submit="sendMessage()" class="ng-dirty ng-invalid ng-invalid-required" name="chat">
+          <input type="text" id="texte-{{pokemon.type1}}" class="ng-dirty ng-invalid ng-invalid-required empty col m11" placeholder="Votre message..." ng-model="message" required="">
+          <span id="boutonenvoi">
+              <button id="{{pokemon.type1}}-dark" class="btn" ng-click="document.forms['chat'].submit();"><i class="mdi-content-send col m1"></i></button>
+          </span>      
+      </form>
+      </div>
+      </div>
+    </div>
+
+
+</section>
+
+
+</div>
+
+
+
+
+
+
+
+

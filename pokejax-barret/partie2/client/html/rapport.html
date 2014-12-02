@@ -1,0 +1,97 @@
+<nav class="red lighten-1">
+<div class="container"> 
+  <div class="nav-wrapper">
+    <a href="/" class="brand-logo">Pokéjax</a>  
+    <ul id="nav-mobile" class="right side-nav">
+      <li><a href="/">Accueil</a></li>
+      <li><a href="/#/rapport">Rapport</a></li>
+    </ul>
+    <a class="button-collapse" href="/" data-activates="nav-mobile"><i class="mdi-navigation-menu"></i></a>
+  </div>
+</div>
+</nav>
+
+
+<div class="container">     
+    <div class="row">
+      <br/>
+      <h2 class="text-primary">Compte-Rendu de l'application</h2><br/>
+    </div>
+
+    <div class="row">
+      <h3>Côté serveur</h3>  
+      <p class="caption">Le serveur utilise le framework nodeJs Express. Celui-ci est constitué de deux parties : </p>  
+      <ul>
+        <li>
+          <h4>Une API : </h4>
+          <p>Le serveur accepte 4 routes, et chacune appelle un callback renvoyant des informations au client : </p>
+          <blockquote>
+            La route <em>"/"</em> renvoie la page d'index. <br/>
+            La route <em>"/pokemons/"</em> appelle le callback <em>"getAllPokemons"</em> qui renvoie une version allégée du pokedex (<em>poketri</em>). <br/>
+            La route <em>"/search/:nom"</em> appelle le callback <em>"selectPokemons"</em> qui renvoie la partie du <em>poketri</em> correspondant au nom dans l'URL. <br/>
+            La route <em>"/pokemon/:nom"</em> appelle le callback <em>"getPokemon"</em> qui renvoie la partie du <em>pokedex</em> complet correspondant au nom dans l'URL. <br/>
+          </blockquote>
+        </li>
+        <li>
+          <h4>Un serveur WebSocket :</h4>
+          <p>Il utilise les variables suivantes : </p>
+          <blockquote>
+            La variable <em>"chatroom"</em> est un tableau à deux dimensions de la taille du pokédex. <br/>
+            La variable <em>"username"</em> est un entier initialisé à 0 qui servira à déterminer le pseudonyme des utilisateurs </br>
+          </blockquote>
+          <p>Le serveur écoute les connexions entrantes et fonctionne sur le protocole suivant : </p>
+          <blockquote>
+            A la connexion d'un utilisateur, le serveur lui envoie un message de type <b>init</b> lui demandant de s'identifier, et lui envoie en même temps son nom d'utilisateur. <br/>
+            L'utilisateur renvoie le numéro de la page sur laquelle il se trouve, et le serveur stocke la socket de l'utilisateur dans la case du tableau <em>"chatroom"</em> correspondant au numéro du pokémon. <br/>
+            Le serveur envoie ensuite à tous les utilisateurs présents sur la page (et donc à toutes les socket de la case correspondantes) un message de type <b>newUser</b> contenant le nombre d'utilisateurs connectés mis à jour.<br/>
+            Ensuite, à chaque <b>message</b> reçu par le serveur, le serveur récupère dans le message le numéro de la page, et transmets le message à tous les utilisateurs correspondants. <br/>            
+          </blockquote>
+          <p>La gestion des déconnexions est gérée coté serveur : </p>
+          <blockquote>
+            A chaque parcours d'une des cases du tableau <em>"chatroom"</em>, les actions critiques (push ou send) sont enveloppées dans des blocs try/catch. <br/>
+            Si une erreur se produit, la socket correspondant à l'indice où s'est produit l'erreur est détruite. <br/>
+            Le serveur envoie ensuite à tous les autres utilisateurs un message de type <b>newUser</b> contenant le nombre d'utilisateurs mis à jour. <br/>
+          </blockquote>
+        </li>
+      </ul>
+
+
+    </div>
+
+
+    <div class="row">
+      <h3>Côté client</h3>
+      <p class="caption">Le client est constitué d'une application AngularJS, et utilise pour le design le framework Materialize et du code CSS personnel.</p>
+      <p> A la réception de la page index envoyée par le serveur, l'application AngularJS démarre. Elle contient un module de routage associant des pages à un controlleur : </p>
+      <blockquote>
+        La route <em>/</em> appelle le template <em>home</em> et fait appel au controlleur <em>"searchController"</em>. <br/>
+        La route <em>/pokemon/:nom</em> appelle le template <em>displayPokemon</em> et fait appel au controlleur <em>pokemonController</em>. <br/>
+        La route <em>/rapport</em> appelle le template <em>rapport</em> et fait appel au controlleur <em>rapportController</em> (vide, la page étant statique). <br/>
+      </blockquote>
+
+      <h4>La page d'accueil : </h4>
+      <p> Elle implémente la fonction d'autocomplétion (TP3)</p>
+      <blockquote>
+        Au chargement de la page, celle-ci appelle la fonction <em>"getAllPokemon"</em> qui va faire une requête XHR sur l'adresse <em>"/pokemons/"</em>. <br/>
+        Les pokémons reçus sont affichés sur la page sous la forme de cartes (template pokemon). <br/>
+        Chaque carte contient les informations de base du pokemon (<em>poketri</em>) ainsi qu'un lien pour accéder à sa fiche. <br/>
+        Un champ texte de recherche est disponible sur la barre de navigation. A chaque caractère rentré (<em>onKeyUp</em>) la fonction <em>search(valeur)</em> est appelée. <br/>
+        La fonction recherche fait une requête au serveur, et celui-ci renvoie les pokémons correspondant à la saisie de l'utilisateur. </br>
+        Si des pokémons sont retournés, des cartes correspondant à chaque pokémons sont créées, remplaçant les précédentes. Sinon, un message d'erreur est affiché. <br/>
+      </blockquote>
+
+      <h4>La fiche pokémon : </h4>
+      <p> Elle contient les informations détaillées du pokémon, ainsi qu'une salle de discussion (TP4)</p>
+      <blockquote>
+        De la même manière que la page d'accueil, la fiche va faire une requête au serveur (adresse <em>"/pokemon/nom"</em>) pour récupérer les informations du pokémon. <br/>
+        Les informations sont affichées sur la page, et les attaques du pokémon sont itérées dans un tableau. </br>
+        A l'arrivée sur la page, une websocket vers le serveur est créée. Le comportement est décrit dans le chapitre concernant le serveur. <br/>
+        Le champ de saisie appelle une fonction <em>send(message)</em> à sa validation. <br/>
+        Chaque message reçu est affiché à la suite dans la fenêtre de chat. </br>
+      </blockquote>
+
+
+
+
+    </div>
+</div>

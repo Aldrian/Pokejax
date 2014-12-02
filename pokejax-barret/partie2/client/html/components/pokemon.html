@@ -1,0 +1,16 @@
+<div class="col s12 m6 l4">
+  <div class="card small">
+    <div class="card-image" id="{{pokemon.type1}}">
+      <img ng-src="http://assets22.pokemon.com/assets/cms2/img/pokedex/full/{{pokemon.numero}}.png/" id="vignette">
+      <span class="card-title black-text">{{pokemon.nom}}</span>      
+    </div>  
+    <div class="card-content">
+      <p><b id="texte-{{pokemon.type1}}">Espèce : {{pokemon.espece}}</b></p>
+      <p>{{pokemon.nomen}} (EN)</p>
+      <p>{{pokemon.nomja}} (JA)</p>
+    </div>
+    <div class="card-action">
+      <a ng-click="getFiche(pokemon.nom)" href="/#/pokemon/{{pokemon.nom}}">Voir la fiche</a>
+    </div>
+  </div>
+</div>

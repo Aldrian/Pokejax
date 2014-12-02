@@ -1,0 +1,180 @@
+#vignette {
+    width: 200px;
+    float : right;
+    z-index: 0;
+}
+
+.text-primary {
+  color :#EE6E73;
+}
+
+em {
+  color : #EF9A9A;
+}
+
+b {
+  color : #EF9A9A;
+}
+
+
+.card-content p {
+  color : #3c3c3c;
+}
+
+
+#footer {
+	padding-top : 5px;
+	background-color : rgb(242, 242, 242);
+}
+
+
+#chat {
+  margin-top: 60px;
+  height : 600px;
+  border: 2px solid #d3d3d3;
+  background-color: #eee; 
+  overflow-y : scroll; 
+
+}
+
+#requete {
+  padding-top:10px;
+	color : #fff;
+	float : right;
+	width : 200px;
+	border-bottom: inherit;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+
+}
+
+#requete:focus {
+	border-bottom: 1px solid #fff;
+  box-shadow: inherit;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+
+
+#barreenvoi:focus {
+  border-bottom: 1px solid #EE6E73;
+  box-shadow: 0px 1px 0px 0px #EE6E73;
+}
+
+#boutonenvoi {
+  margin-top: 5px;
+  margin-left: 10px;
+}
+
+
+#boutonenvoi button{
+  margin : inherit;
+  padding : inherit;
+}
+
+#boutonenvoi i {
+  margin-right : inherit;
+}
+
+
+section.module:last-child {
+  margin-bottom: 0;
+}
+section.module h2 {
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 30px;
+}
+
+section.module.content {
+  padding: 40px 0;
+}
+section.module.parallaxe {
+  padding-top : 20%;
+  height: 600px;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+section.module.parallaxe h1 {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 48px;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+@media all and (min-width: 600px) {
+  section.module h2 {
+    font-size: 42px;
+  }
+  section.module p {
+    font-size: 20px;
+  }
+  section.module.parallaxe h1 {
+    font-size: 72px;
+  }
+}
+
+
+
+::-webkit-scrollbar-track
+{
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar
+{
+    width: 6px;
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+    background-color: #aaa;
+}
+
+.fade.ng-enter {
+  -webkit-transition:0.5s linear all;
+  -moz-transition:0.5s linear all;
+  -o-transition:0.5s linear all;
+  transition:0.5s linear all;
+  opacity:0;
+}
+
+.fade.ng-enter.ng-enter-active {
+  opacity:1;
+}
+
+
+@keyframes my_animation {
+  from { opacity:1; }
+  to { opacity:0; }
+}
+
+@-webkit-keyframes my_animation {
+  from { opacity:1; }
+  to { opacity:0; }
+}
+
+@-moz-keyframes my_animation {
+  from { opacity:1; }
+  to { opacity:0; }
+}
+
+@-o-keyframes my_animation {
+  from { opacity:1; }
+  to { opacity:0; }
+}
+
+
+
+
+
+
+
+
+
+
+
